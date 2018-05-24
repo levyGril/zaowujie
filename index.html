@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>淘宝造物节-css3D技术的应用</title>
+    <style type="text/css">
+        body{
+            background: url("./images/bg.jpg") no-repeat;
+        }
+        .container{
+            margin: 0 auto;
+            width: 8.0625rem;
+
+            /* 目前并非所有浏览器皆支援 */
+            perspective:1260px;
+            -webkit-perspective:1260px;
+            -moz-perspective:360px;
+
+            perspective-origin: 50% 50%;
+            -webkit-perspective-origin: 50% 50%;/* Safari and Chrome */
+            -moz-perspective-origin:50% 50%; /* Firefox */
+        }
+        .content{
+            height:73.125rem;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+
+            -webkit-transform: rotateX(-30deg) rotateY(30deg);
+            /*transform: rotateX(-30deg) rotateY(30deg);*/
+
+            -webkit-animation: taoRotate 18s ease-in-out infinite 4s;
+            animation: taoRotate 18s ease-in-out infinite 4s;
+
+        }
+        .content>div{
+            position: absolute;
+            width: 8.0625rem;
+            height:73.125rem;
+            /*background-color: #4D926F;*/
+            /*opacity: 0.7;*/
+        }
+
+
+        @-webkit-keyframes taoRotate {
+            0% {
+                -webkit-transform: rotateX(-30deg) rotateY(0deg);
+                transform: rotateX(-30deg) rotateY(0deg);
+            }
+            16.7% {
+                -webkit-transform:rotateX(-30deg) rotateY(60deg);
+                transform:rotateX(-30deg) rotateY(60deg);
+            }
+            33.3% {
+                -webkit-transform:rotateX(-30deg) rotateY(120deg);
+                transform:rotateX(-30deg) rotateY(120deg);
+            }
+            50% {
+                -webkit-transform:rotateX(-30deg) rotateY(180deg);
+                transform:rotateX(-30deg) rotateY(180deg);
+            }
+            66.7% {
+                -webkit-transform:rotateX(-30deg) rotateY(240deg);
+                transform:rotateX(-30deg) rotateY(240deg);
+            }
+            83.3% {
+                -webkit-transform:rotateX(-30deg) rotateY(300deg);
+                transform:rotateX(-30deg) rotateY(300deg);
+            }
+            100% {
+                -webkit-transform:rotateX(-30deg) rotateY(360deg);
+                transform:rotateX(-30deg) rotateY(360deg);
+            }
+        }
+
+        @keyframes taoRotate {
+            0% {
+                -webkit-transform:rotateX(-30deg) rotateY(0deg);
+                transform:rotateX(-30deg) rotateY(0deg);
+            }
+            16.7% {
+                -webkit-transform: rotateX(-30deg) rotateY(60deg);
+                transform: rotateX(-30deg) rotateY(60deg);
+            }
+            33.3% {
+                -webkit-transform: rotateX(-30deg) rotateY(120deg);
+                transform:rotateX(-30deg) rotateY(120deg);
+            }
+            50% {
+                -webkit-transform: rotateX(-30deg) rotateY(180deg);
+                transform: rotateX(-30deg) rotateY(180deg);
+            }
+            66.7% {
+                -webkit-transform: rotateX(-30deg) rotateY(240deg);
+                transform:rotateX(-30deg) rotateY(240deg);
+            }
+            83.3% {
+                -webkit-transform: rotateX(-30deg) rotateY(300deg);
+                transform: rotateX(-30deg) rotateY(300deg);
+            }
+            100% {
+                -webkit-transform: rotateX(-30deg) rotateY(360deg);
+                transform:rotateX(-30deg) rotateY(360deg);
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="container">
+    <!--音频  循环播放-->
+    <audio autoplay="true" playcount="-1">
+        <source src="./images/bgm.ogg" type="audio/ogg">
+        <source src="./images/bgm.mp3" type="audio/mpeg">
+    </audio>
+    <!--<audio autoplay="" loop="-1" ><source src="./images/bgm.mp3" type="audio/mp3"></audio>-->
+    <!--<audio autoplay="" loop="-1"><source src="./images/bgm.ogg"></audio>-->
+    <div class="content">
+        <div title="1">1</div>
+        <div title="2">2</div>
+        <div title="3">3</div>
+        <div title="4">4</div>
+        <div title="5">5</div>
+        <div title="6">6</div>
+        <div title="7">7</div>
+        <div title="8">8</div>
+        <div title="9">9</div>
+        <div title="10">10</div>
+        <div title="11">11</div>
+        <div title="12">12</div>
+        <div title="13">13</div>
+        <div title="14">14</div>
+        <div title="15">15</div>
+        <div title="16">16</div>
+        <div title="17">17</div>
+        <div title="18">18</div>
+        <div title="19">19</div>
+        <div title="20">20</div>
+    </div>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+    var radius =  calRadius(129, 20); // 410
+    $(".content div").each(function(index,element){
+        //每个div加上背景图片
+        $(this).css("background", 'url("./images/p'+(index+1)+'.png") no-repeat') ;
+
+        // 沿着Y轴旋转一定的角度，再沿Z轴往外推（计算出半径R）
+        $(this).css("transform", 'rotateY('+360*index/20+'deg) translateZ('+radius+'px)');
+        $(this).css("-webkit-transform", 'rotateY('+360*index/20+'deg) translateZ('+radius+'px)');
+    });
+
+    // 计算出半径
+    function calRadius(length, totalNum) {
+        return Math.round(length / (2 * Math.tan(Math.PI / totalNum)))+3;
+    };
+</script>
+</body>
+</html>
